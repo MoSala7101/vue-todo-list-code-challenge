@@ -19,19 +19,17 @@ export default {
     mutations: {
         /* get all stored todos and add it to the state todos array  */
         LOAD_STORED_TODOS: (state) => {
-            let storedTodos = JSON.parse(localStorage.getItem("todos"));
+            /* get stored todos from local storage or 
+            create an empty array to be the state todos*/
+            let storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+            /* update the state todos array */
             state.todos = storedTodos;
         },
         /* add a new todo to the stored todos 
         then update the state todos array   */
         ADD_NEW_TODO: (state, todoTitle) => {
-            /* check if there a todos variable in the localStorage 
-            if not found then create it as an empty array  */
-            if (!localStorage.getItem("todos")) {
-                localStorage.setItem("todos", JSON.stringify([]))
-            }
-            /* get all saved todos from the local storage */
-            let storedTodos = JSON.parse(localStorage.getItem("todos"));
+            /* get stored todos from local storage or assign it to an empty array */
+            let storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
             /* push the new todo to the storedTodos  */
             storedTodos.push({
                     title: todoTitle,

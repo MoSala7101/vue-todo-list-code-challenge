@@ -42,6 +42,10 @@ export default {
   },
   methods: {
     ...mapActions("todosModule", ["addNewTodo", "loadStoredTodos"]),
+    refreshStateTodos ()  {
+      this.addNewTodo();
+      this.loadStoredTodos();
+    },
   },
 };
 </script>

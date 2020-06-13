@@ -18,7 +18,7 @@
         @click="clearCompleted"
       >
         remove completed ({{ getCompletedTodosCount() }})</v-btn
-        >
+      >
     </v-flex>
     <TodoItem
       class="mb-3"
