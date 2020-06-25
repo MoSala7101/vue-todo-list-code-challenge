@@ -5,7 +5,7 @@
     </v-toolbar>
     <v-content class="d-flex align-center">
       <v-layout align-center fill-height justify-center>
-        <v-flex xs6>
+        <v-flex xs10 sm8 md6 lg6>
           <p class="app-title primary--text">
             {{ title }}
           </p>

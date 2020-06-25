@@ -1,13 +1,13 @@
 <template lang="html">
   <v-card 
-    class="pb-2" 
+    class="pb-2 item-width" 
     :class="{ 'completed-todo': isCompleted }">
     <v-card-title primary-title>
       <div>
         <h3 class="headline mb-0">{{ title }}</h3>
       </div>
     </v-card-title>
-    <div class="d-flex fit-content ml-auto mr-2">
+    <v-flex class="d-flex fit-content ml-auto mr-2 item-buttons-width">
       <v-btn
         color="success"
         v-if="!isCompleted"
@@ -32,7 +32,7 @@
           dark>mdi-delete</v-icon>
         Delete
       </v-btn>
-    </div>
+    </v-flex>
   </v-card>
 </template>
 <script>
@@ -55,6 +55,12 @@ export default {
 }
 .ml-auto {
   margin-left: auto !important;
+}
+.item-width{
+  min-width: 280px;
+}
+.item-buttons-width{
+  width: 280px !important;
 }
 .completed-todo {
   background: #f9f9f9 !important;

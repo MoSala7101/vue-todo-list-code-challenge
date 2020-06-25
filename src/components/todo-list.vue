@@ -6,6 +6,7 @@
       align-center
       justify-space-between
       flex-row
+      class="flex-wrap"
       v-if="getTodosCount()"
     >
       <h3 class="headline mb-0 font-weight-bold todos-list-title">
