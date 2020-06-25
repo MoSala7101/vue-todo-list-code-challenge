@@ -83,6 +83,32 @@ export default {
             localStorage.setItem("todos", JSON.stringify(uncompletedTodos))
                 /* update the state todos */
             state.todos = uncompletedTodos;
+        },
+        /* search for typed text in the current todos */
+        SEARCH_FOR_TODO: (state, text) => {
+            /* convert all todos text to lower case to search effectivly */
+            let theText = text.toLowerCase();
+            /* get all of stored todos title to search in with the text */
+            let todosTitles = state.todos.map(todo => todo.title.toLowerCase())
+                /* to store the indexes of the todos that contain the text */
+            let targetTodosIndexes = [];
+            /* to store the todos items that have the targetTodosIndexes */
+            let foundTodos = [];
+            /* loop through the todos titles to find the item that contains the typed text */
+            todosTitles.map(title => {
+                    /* check if title contains the typed text */
+                    if (title.includes(theText)) {
+                        /* push the index of the current title that contains the typed word */
+                        targetTodosIndexes.push({ index: todosTitles.indexOf(title) })
+                    }
+                })
+                /* loop through the collected indexes to push the todo items into foundTodos array  */
+            targetTodosIndexes.forEach(currentIndex => {
+
+                    foundTodos.push(state.todos[currentIndex.index])
+                })
+                /* update state todos */
+            state.todos = foundTodos
         }
     },
     actions: {
@@ -103,6 +129,16 @@ export default {
         },
         clearCompleted: (context) => {
             context.commit('CLEAR_COMPLETED')
-        }
+        },
+        searchForTodo(context, text) {
+            /* check the length of the typed word */
+            if (text.length == 0) {
+                /* load all of the stored todos */
+                context.commit('LOAD_STORED_TODOS')
+            } else {
+                /* search for the typed word */
+                context.commit('SEARCH_FOR_TODO', text)
+            }
+        },
     },
 }

@@ -35,14 +35,12 @@
 </template>
 <script>
 import TodoItem from "@/components/todo-item";
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     TodoItem,
   },
-  computed: {
-    ...mapState("todosModule", ["todos"]),
-  },
+  props: ["todos"],
   methods: {
     ...mapGetters("todosModule", ["getTodosCount", "getCompletedTodosCount"]),
     ...mapActions("todosModule", [

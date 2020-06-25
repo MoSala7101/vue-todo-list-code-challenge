@@ -1,10 +1,8 @@
 <template lang="html">
-  <v-text-field
-    placeholder="What do you have to do?"
-    solo
-    v-model="newTodoTitle"
-    @keydown.enter="addNewTodo()"
-  />
+  <v-text-field placeholder="What do you have to do?" 
+  solo
+  v-model="newTodoTitle" @keydown.enter="addNewTodo()" 
+  @input="$emit('search-for-todo', newTodoTitle)" />
 </template>
 <script>
 export default {

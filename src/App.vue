@@ -1,22 +1,19 @@
 <template>
   <v-app>
-    <v-toolbar 
-      app 
-      color="primary" 
-      dark>
+    <v-toolbar app color="primary" dark>
       <v-toolbar-title v-text="title" />
     </v-toolbar>
     <v-content class="d-flex align-center">
-      <v-layout 
-        align-center 
-        fill-height 
-        justify-center>
+      <v-layout align-center fill-height justify-center>
         <v-flex xs6>
           <p class="app-title primary--text">
             {{ title }}
           </p>
-          <TodoForm @add-new-todo="addNewTodo" />
-          <TodoList />
+          <TodoForm
+            @add-new-todo="addNewTodo"
+            @search-for-todo="searchForTodo"
+          />
+          <TodoList :todos="todos" />
         </v-flex>
       </v-layout>
     </v-content>
@@ -25,7 +22,7 @@
 <script>
 import TodoForm from "@/components/todo-form";
 import TodoList from "@/components/todo-list";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "App",
   created() {
@@ -35,14 +32,21 @@ export default {
     TodoForm,
     TodoList,
   },
+  computed: {
+    ...mapState("todosModule", ["todos"]),
+  },
   data() {
     return {
       title: "Vue Todos",
     };
   },
   methods: {
-    ...mapActions("todosModule", ["addNewTodo", "loadStoredTodos"]),
-    refreshStateTodos ()  {
+    ...mapActions("todosModule", [
+      "addNewTodo",
+      "loadStoredTodos",
+      "searchForTodo",
+    ]),
+    refreshStateTodos() {
       this.addNewTodo();
       this.loadStoredTodos();
     },
